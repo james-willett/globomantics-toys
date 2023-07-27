@@ -43,3 +43,6 @@ server:
 springdoc:
   packagesToScan: io.gatling.demostore.api
   pathsToMatch: /api/**
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha

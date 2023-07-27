@@ -6,11 +6,11 @@ VALUES (5,'For Him','for-him',100),
        (6,'For Her','for-her',100),
        (7,'Unisex','unisex',100);
 
-INSERT INTO pages (id, title, slug, content, sorting)
-VALUES (1,'Home','home','<h2>Welcome to the Gatling DemoStore!</h2><p>&nbsp;</p><p>This is a fictional / dummy eCommerce store that sells eyeglass cases.</p><p>Since this is a sandbox solution, no actual sales transactions are completed on this site.</p><p>&nbsp;</p><p>You can login with the user admin (password <code>admin</code>) or users john, user1, user2 and user3 (password <code>pass</code>)</p><p>&nbsp;</p><h3><strong>&lt; Select a category from the left-hand menu</strong></h3><p>&nbsp;</p><p>The purpose of this store is to teach the creation of test scripts with the <a href="https://gatling.io">Gatling</a> load testing tool.</p><p>To find out more, check out the <a href="https://gatling.io/academy/">Gatling Academy</a></p>',0),
-       (10,'About us','about-us','<h2>About Us</h2><p>&nbsp;</p><p>This is a fictional / dummy eCommerce store that sells eyeglass cases.</p><p>The purpose of this site is to teach the creation of test scripts with the <a href="https://gatling.io">Gatling</a> load testing tool.</p>',100),
-       (11,'Contact','contact','<h2>Contact Us</h2><p>&nbsp;</p><p>To learn how this site can help teach you the creation of load testing scripts, check out the <a href="https://gatling.io/academy/">Gatling Academy</a>.</p><p>If you need to contact the Gatling team directly, check the <a href="https://gatling.io/company/contact/">Contact Us</a> page on the Gatling website.</p>',100),
-       (12,'API','rest-api','<h2>REST API</h2><p>&nbsp;</p><p>The Demo Store also includes a REST API. Use these resources to explore the API:</p><ul><li><a href="/swagger-ui">Swagger UI</a></li><li><a href="/downloads/gatling-demostore-api-postman.zip">Postman collection</a></li></ul>',100);
+-- INSERT INTO pages (id, title, slug, content, sorting)
+-- VALUES (1,'Home','home','<h2>Welcome to the Gatling DemoStore!</h2><p>&nbsp;</p><p>This is a fictional / dummy eCommerce store that sells eyeglass cases.</p><p>Since this is a sandbox solution, no actual sales transactions are completed on this site.</p><p>&nbsp;</p><p>You can login with the user admin (password <code>admin</code>) or users john, user1, user2 and user3 (password <code>pass</code>)</p><p>&nbsp;</p><h3><strong>&lt; Select a category from the left-hand menu</strong></h3><p>&nbsp;</p><p>The purpose of this store is to teach the creation of test scripts with the <a href="https://gatling.io">Gatling</a> load testing tool.</p><p>To find out more, check out the <a href="https://gatling.io/academy/">Gatling Academy</a></p>',0),
+--        (10,'About us','about-us','<h2>About Us</h2><p>&nbsp;</p><p>This is a fictional / dummy eCommerce store that sells eyeglass cases.</p><p>The purpose of this site is to teach the creation of test scripts with the <a href="https://gatling.io">Gatling</a> load testing tool.</p>',100),
+--        (11,'Contact','contact','<h2>Contact Us</h2><p>&nbsp;</p><p>To learn how this site can help teach you the creation of load testing scripts, check out the <a href="https://gatling.io/academy/">Gatling Academy</a>.</p><p>If you need to contact the Gatling team directly, check the <a href="https://gatling.io/company/contact/">Contact Us</a> page on the Gatling website.</p>',100),
+--        (12,'API','rest-api','<h2>REST API</h2><p>&nbsp;</p><p>The Demo Store also includes a REST API. Use these resources to explore the API:</p><ul><li><a href="/swagger-ui">Swagger UI</a></li><li><a href="/downloads/gatling-demostore-api-postman.zip">Postman collection</a></li></ul>',100);
 
 INSERT INTO products (id, name, slug, description, image, price, category_id, created_at, updated_at)
 VALUES (17,'Casual Black-Blue','casual-black-blue','<p>Some casual black &amp; blue glasses</p>','casual-blackblue-open.jpg',24.99,5,'2020-11-10 10:05:14','2020-11-10 10:05:14'),
@@ -36,8 +36,8 @@ VALUES (17,'Casual Black-Blue','casual-black-blue','<p>Some casual black &amp; b
        (38,'Plain White','plain-white','<p>Simple plain white glasses case, with blue interior</p>','curve-white-open.jpg',9.99,7,'2020-11-15 17:05:56','2020-11-15 17:05:56'),
        (39,'White Leopard Pattern','white-leopard-pattern','<p>White leopard pattern design glasses case</p>','curve-whitepattern-open.jpg',13.99,7,'2020-11-15 17:06:32','2020-11-15 17:06:32');
 
-INSERT INTO users (id, username, password, email, phone_number)
-VALUES (1,'john','pass','john@gmail.com','11111111'),
-       (2,'user1','pass','user1@email.com','11111111'),
-       (3,'user2','pass','user2@email.com','11111111'),
-       (4,'user3','pass','user3@email.com','11111111');
+-- INSERT INTO users (id, username, password, email, phone_number)
+-- VALUES (1,'john','pass','john@gmail.com','11111111'),
+--        (2,'user1','pass','user1@email.com','11111111'),
+--        (3,'user2','pass','user2@email.com','11111111'),
+--        (4,'user3','pass','user3@email.com','11111111');

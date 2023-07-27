@@ -10,7 +10,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -77,7 +79,7 @@ public class ApiCategoriesController {
         category.setSlug(slug);
         category.setSorting(100);
 
-        // DO NO SAVE (readonly)
+        categoryRepository.save(category);
         return category;
     }
 
@@ -104,7 +106,21 @@ public class ApiCategoriesController {
         category.setSlug(slug);
         category.setName(request.getName());
 
-        // DO NO SAVE (readonly)
+        categoryRepository.save(category);
         return category;
+    }
+
+    @Operation(summary = "Delete a category", security = @SecurityRequirement(name = SECURITY_SCHEME))
+    @ApiResponses(
+            @ApiResponse(responseCode = "404", description = "Category not found")
+    )
+    @DeleteMapping(path = "/{id}",  produces = MediaType.TEXT_PLAIN_VALUE)
+    public String delete(@PathVariable @Parameter(description = "Category ID") Integer id) {
+        Category category = categoryRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        categoryRepository.delete(category);
+        return "Category: " + category.getName() + " deleted succesfully";
     }
 }

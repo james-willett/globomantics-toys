@@ -44,6 +44,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/authenticate").permitAll()
                 .antMatchers(HttpMethod.POST).hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.PUT).hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasAnyRole("ADMIN")
                 .and()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();

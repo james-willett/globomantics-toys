@@ -12,7 +12,9 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -100,7 +102,7 @@ public class ApiProductsController {
         product.setCreatedAt(LocalDateTime.now());
         product.setUpdatedAt(LocalDateTime.now());
 
-        // DO NO SAVE (readonly)
+        productRepository.save(product);
         return product;
     }
 
@@ -137,7 +139,25 @@ public class ApiProductsController {
         product.setCategoryId(request.getCategoryId().toString());
         product.setUpdatedAt(LocalDateTime.now());
 
-        // DO NO SAVE (readonly)
+        productRepository.save(product);
         return product;
+    }
+
+    @Operation(summary = "Delete a product", security = @SecurityRequirement(name = SECURITY_SCHEME))
+    @ApiResponses(
+            @ApiResponse(responseCode = "404", description = "Product not found")
+    )
+    @DeleteMapping(path = "/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String deleteProduct(
+            @PathVariable @Parameter(description = "Product ID") Integer id
+    ) {
+        Product product = productRepository
+                .findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        productRepository.delete(product);
+        return "Product: " + product.getName() + " deleted succesfully";
+
+
     }
 }
