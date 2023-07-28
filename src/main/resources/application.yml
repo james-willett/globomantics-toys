@@ -4,7 +4,7 @@ spring:
       name: user
       password: pass
   datasource:
-    url: jdbc:h2:mem:gatling-demostore
+    url: jdbc:h2:mem:globomantics-toys
     username: sa
     password:
     driverClassName: org.h2.Driver
@@ -17,16 +17,6 @@ spring:
     multipart:
       max-file-size: -1
       max-request-size: -1
-  thymeleaf:
-    check-template-location: true
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: LEGACYHTML5
-    encoding: UTF-8
-    content-type: text/html
-    cache: false
-    check-template: true
-    enabled: true
 
 
 jwt.secret: "wToGV5RiWAU4UNQHJPVBXISBPNJ5C8yoiqbTRu5fXjM="
@@ -41,7 +31,7 @@ server:
   port: 8080
 
 springdoc:
-  packagesToScan: io.gatling.demostore.api
+  packagesToScan: io.globomantics.toystore.api
   pathsToMatch: /api/**
   swagger-ui:
     operations-sorter: alpha
