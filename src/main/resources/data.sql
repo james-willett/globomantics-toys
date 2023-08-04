@@ -1,10 +1,10 @@
 INSERT INTO admin (id, username, password)
 VALUES (1,'admin','admin');
 
-INSERT INTO categories (id, name, slug)
-VALUES (1,'Babies Toys','babies-toys'),
-       (2,'Kids Toys','kids-toys'),
-       (3,'Grown-ups Toys','grown-ups-toys');
+INSERT INTO categories (name, slug)
+VALUES ('Babies Toys','babies-toys'),
+       ('Kids Toys','kids-toys'),
+       ('Grown-ups Toys','grown-ups-toys');
 
 INSERT INTO products (name, slug, description, price, category_id, created_at, updated_at)
 VALUES ('Vintage Minature Car','vintage-minature-car','This little car is just so cute, and your baby is going to love driving it around on the floor!',24.99,1,'2020-11-10 10:05:14','2020-11-10 10:05:14'),
