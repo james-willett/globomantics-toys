@@ -154,7 +154,7 @@ public class ApiProductsController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         productRepository.delete(product);
-        return "Product: " + product.getName() + " deleted succesfully";
+        return "Product: " + product.getName() + " deleted successfully";
 
 
     }

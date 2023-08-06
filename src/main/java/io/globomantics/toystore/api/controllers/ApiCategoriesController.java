@@ -120,6 +120,6 @@ public class ApiCategoriesController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         categoryRepository.delete(category);
-        return "Category: " + category.getName() + " deleted succesfully";
+        return "Category: " + category.getName() + " deleted successfully";
     }
 }
