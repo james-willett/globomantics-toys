@@ -53,7 +53,7 @@ public class ApiCategoriesController {
     public Category get(@PathVariable @Parameter(description = "Category ID") Integer id) {
         return categoryRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Error: Category not found"));
     }
 
     @Operation(summary = "Create a category", security = @SecurityRequirement(name = SECURITY_SCHEME))
@@ -66,12 +66,12 @@ public class ApiCategoriesController {
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Category JSON payload is invalid");
         }
 
         String slug = request.getName().toLowerCase().replace(" ", "-");
         if (categoryRepository.findBySlug(slug) != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Category already exists");
         }
 
         Category category = new Category();
@@ -95,10 +95,10 @@ public class ApiCategoriesController {
     ) {
         Category category = categoryRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Error: Category not found"));
 
         if (bindingResult.hasErrors()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Category JSON payload is invalid");
         }
 
         String slug = request.getName().toLowerCase().replace(" ", "-");
@@ -117,7 +117,7 @@ public class ApiCategoriesController {
     public String delete(@PathVariable @Parameter(description = "Category ID") Integer id) {
         Category category = categoryRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Error: Category not found"));
 
         categoryRepository.delete(category);
         return "Category: " + category.getName() + " deleted successfully";

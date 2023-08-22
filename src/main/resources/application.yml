@@ -26,7 +26,10 @@ auth.cookie.hmac-key: "y.E@EA!FbtCwXYB-2v_n.!*xgzRqgtbq2d2_A_U!W2hubL@URHRzNP96W
 
 
 server:
-  error.whitelabel.enabled: false
+  error:
+    include-message: always
+    include-stacktrace: never
+    whitelabel.enabled: false
   servlet.session.timeout: 1m
   port: 8080
 

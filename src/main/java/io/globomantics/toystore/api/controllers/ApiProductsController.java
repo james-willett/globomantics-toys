@@ -69,7 +69,7 @@ public class ApiProductsController {
     ) {
         return productRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Error: Product not found"));
     }
 
     @Operation(summary = "Create a product", security = @SecurityRequirement(name = SECURITY_SCHEME))
@@ -82,14 +82,18 @@ public class ApiProductsController {
             BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Product JSON payload is invalid");
         }
 
         String slug = request.getName().toLowerCase().replace(" ", "-");
         boolean productExists = productRepository.findBySlug(slug) != null;
+        if (productExists) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Product already exists");
+        }
+
         boolean categoryExists = categoryRepository.findById(request.getCategoryId()).isPresent();
-        if (productExists || !categoryExists) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        if (!categoryExists) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Category does not exist");
         }
 
         Product product = new Product();
@@ -118,18 +122,23 @@ public class ApiProductsController {
     ) {
         Product product = productRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Error: Product not found"));
 
         if (bindingResult.hasErrors()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Product JSON payload is invalid");
         }
 
         boolean categoryExists = categoryRepository.findById(request.getCategoryId()).isPresent();
         if (!categoryExists) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Category does not exist");
         }
 
         String slug = request.getName().toLowerCase().replace(" ", "-");
+        boolean productExists = productRepository.findBySlug(slug) != null;
+        if (productExists) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Product already exists with this name");
+        }
+
         product.setName(request.getName());
         product.setSlug(slug);
         product.setDescription(request.getDescription());
@@ -151,7 +160,7 @@ public class ApiProductsController {
     ) {
         Product product = productRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Error: Product not found"));
 
         productRepository.delete(product);
         return "Product: " + product.getName() + " deleted successfully";
