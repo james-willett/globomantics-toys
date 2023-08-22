@@ -29,6 +29,10 @@ public class ProductRequest {
     @Positive(message = "Please choose a valid category")
     private Integer categoryId;
 
+    @Schema(required = true)
+    @NotNull(message = "Please set if product is in stock")
+    private Boolean inStock;
+
     public String getName() {
         return this.name;
     }
@@ -59,5 +63,13 @@ public class ProductRequest {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Boolean getInStock() {
+        return this.inStock;
+    }
+
+    public void setInStock(Boolean inStock) {
+        this.inStock = inStock;
     }
 }

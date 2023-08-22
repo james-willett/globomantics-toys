@@ -104,6 +104,7 @@ public class ApiProductsController {
         product.setCategoryId(request.getCategoryId().toString());
         product.setCreatedAt(LocalDateTime.now());
         product.setUpdatedAt(LocalDateTime.now());
+        product.setInStock(request.getInStock());
 
         productRepository.save(product);
         return product;
@@ -134,17 +135,13 @@ public class ApiProductsController {
         }
 
         String slug = request.getName().toLowerCase().replace(" ", "-");
-        boolean productExists = productRepository.findBySlug(slug) != null;
-        if (productExists) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Product already exists with this name");
-        }
-
         product.setName(request.getName());
         product.setSlug(slug);
         product.setDescription(request.getDescription());
         product.setPrice(request.getPrice());
         product.setCategoryId(request.getCategoryId().toString());
         product.setUpdatedAt(LocalDateTime.now());
+        product.setInStock(request.getInStock());
 
         productRepository.save(product);
         return product;

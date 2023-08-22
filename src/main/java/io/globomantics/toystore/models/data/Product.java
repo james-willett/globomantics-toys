@@ -39,6 +39,9 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @Column(name = "in_stock")
+    private Boolean inStock;
+
     public int getId() {
         return this.id;
     }
@@ -101,5 +104,13 @@ public class Product {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Boolean getInStock() {
+        return this.inStock;
+    }
+
+    public void setInStock(Boolean inStock) {
+        this.inStock = inStock;
     }
 }
